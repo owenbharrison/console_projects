@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "marching_squares", "marchin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "voronoi", "voronoi\voronoi.vcxproj", "{256300CF-3984-4BA7-B8CA-B5C8854456A4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steering_behaviors", "steering_behaviors\steering_behaviors.vcxproj", "{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{256300CF-3984-4BA7-B8CA-B5C8854456A4}.Release|x64.Build.0 = Release|x64
 		{256300CF-3984-4BA7-B8CA-B5C8854456A4}.Release|x86.ActiveCfg = Release|Win32
 		{256300CF-3984-4BA7-B8CA-B5C8854456A4}.Release|x86.Build.0 = Release|Win32
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Debug|x64.ActiveCfg = Debug|x64
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Debug|x64.Build.0 = Debug|x64
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Debug|x86.ActiveCfg = Debug|Win32
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Debug|x86.Build.0 = Debug|Win32
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x64.ActiveCfg = Release|x64
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x64.Build.0 = Release|x64
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x86.ActiveCfg = Release|Win32
+		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
