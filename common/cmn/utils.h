@@ -17,5 +17,10 @@ namespace cmn {
 		float t=std::rand()/rand_max;
 		return a+t*(b-a);
 	}
+
+	//inclusive integer choice [a, b]
+	int randInt(int a, int b) {
+		return a+std::rand()%(1+b-a);
+	}
 }
 #endif
