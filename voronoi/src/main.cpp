@@ -45,8 +45,8 @@ void hash31(float p, float& x, float& y, float& z) {
 
 using cmn::float2;
 
-struct VoronoiDemo : public cmn::ConsoleEngine {
-	Particle particles[16];
+struct Voronoi : public cmn::ConsoleEngine {
+	Particle particles[24];
 
 	int width=0, height=0;
 	int* grid=nullptr;
@@ -55,7 +55,7 @@ struct VoronoiDemo : public cmn::ConsoleEngine {
 	bool use_manhattan=false;
 
 	bool user_create() override {
-		app_title="Voronoi Demo";
+		app_title="Voronoi";
 
 		for(auto& p:particles) {
 			//random placement
@@ -160,4 +160,4 @@ struct VoronoiDemo : public cmn::ConsoleEngine {
 	}
 };
 
-CMN_ENGINE_LAUNCH(VoronoiDemo, 640, 480)
+CMN_ENGINE_LAUNCH(Voronoi, 960, 540)
