@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "voronoi", "voronoi\voronoi.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steering_behaviors", "steering_behaviors\steering_behaviors.vcxproj", "{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fireworks", "fireworks\fireworks.vcxproj", "{FB19D1E2-EA97-422B-9370-8FA260AFE51F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x64.Build.0 = Release|x64
 		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x86.ActiveCfg = Release|Win32
 		{5D5C57AB-AD23-4AF3-A626-AE59DE4CB8CC}.Release|x86.Build.0 = Release|Win32
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Debug|x64.ActiveCfg = Debug|x64
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Debug|x64.Build.0 = Debug|x64
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Debug|x86.ActiveCfg = Debug|Win32
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Debug|x86.Build.0 = Debug|Win32
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Release|x64.ActiveCfg = Release|x64
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Release|x64.Build.0 = Release|x64
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Release|x86.ActiveCfg = Release|Win32
+		{FB19D1E2-EA97-422B-9370-8FA260AFE51F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
