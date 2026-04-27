@@ -28,7 +28,7 @@ static void cartesianToPolar(
 	const cmn::float3& p,
 	float& yaw, float& pitch) {
 	yaw=std::atan2(p.z, p.x);
-	float d_xz=std::sqrt(p.x*p.x*p.z*p.z);
+	float d_xz=std::sqrt(p.x*p.x+p.z*p.z);
 	pitch=std::atan2(p.y, d_xz);
 }
 
@@ -54,16 +54,18 @@ struct Triangle {
 
 using cmn::float3;
 
-struct Voronoi : public cmn::ConsoleEngine {
-	float3 cam_pos{2, 2, 2};
+struct Orthographic : public cmn::ConsoleEngine {
+	float3 cam_pos{2, 2, 3};
 	float cam_yaw=0, cam_pitch=0;
 	float3 cam_dir;
 	
+	float3 sun_pos{3.473f, 9.139f, 4.365f};
+
 	std::vector<float3> vertexes;
 	std::vector<Triangle> tris;
 
 	bool user_create() override {
-		app_title="Voronoi";
+		app_title="Orthographic";
 
 		//look at origin
 		cartesianToPolar(-cam_pos, cam_yaw, cam_pitch);
@@ -127,6 +129,8 @@ struct Voronoi : public cmn::ConsoleEngine {
 
 		handleCameraMovement(dt);
 		
+		if(GetKey(SAPP_KEYCODE_L).pressed) sun_pos=cam_pos;
+
 		return true;
 	}
 
@@ -142,7 +146,7 @@ struct Voronoi : public cmn::ConsoleEngine {
 		float y_ctr=.5f*rst.getHeight();
 		std::vector<float3> transformed_verts;
 		for(const auto& v:vertexes) {
-			float3 t=project(v, cam_pos, rgt, up, -fwd);
+			float3 t=project(v, cam_pos, rgt, up, fwd);
 			//shift into screen
 			t.x=x_ctr+20*t.x;
 			t.y=y_ctr-20*t.y;
@@ -156,18 +160,30 @@ struct Voronoi : public cmn::ConsoleEngine {
 		const cmn::Glyph white{'#', 255, 255, 255};
 		for(const auto& t:tris) {
 			//behind camera?
-			const auto& a=transformed_verts[t.a];
-			const auto& b=transformed_verts[t.b];
-			const auto& c=transformed_verts[t.c];
-			if(a.z>0||b.z>0||c.z>0) continue;
+			const auto& ta=transformed_verts[t.a];
+			const auto& tb=transformed_verts[t.b];
+			const auto& tc=transformed_verts[t.c];
+			if(ta.z<0||tb.z<0||tc.z<0) continue;
 			
-			rst.draw_line_f(a.x, a.y, b.x, b.y, white);
-			rst.draw_line_f(b.x, b.y, c.x, c.y, white);
-			rst.draw_line_f(c.x, c.y, a.x, a.y, white);
+			//facing away from camera
+			const auto& a=vertexes[t.a];
+			const auto& b=vertexes[t.b];
+			const auto& c=vertexes[t.c];
+			float3 ab=b-a, ac=c-a;
+			float3 norm=normalize(cross(ab, ac));
+			float3 avg=(a+b+c)/3;
+			if(dot(cam_pos-avg, norm)<0) continue;
+
+			//dot product lighting
+			float3 sun_dir=normalize(sun_pos-avg);
+			float lum=std::clamp(dot(sun_dir, norm), 0.f, 1.f);
+			int ix=std::clamp(int(10*lum), 0, 9);
+			cmn::Glyph glyph{" .:-=+*#%@"[ix], 255, 255, 255};
+			rst.fill_triangle_f(ta.x, ta.y, tb.x, tb.y, tc.x, tc.y, glyph);
 		}
 
 		return true;
 	}
 };
 
-CMN_ENGINE_LAUNCH(Voronoi, 960, 540)
+CMN_ENGINE_LAUNCH(Orthographic, 600, 600)
