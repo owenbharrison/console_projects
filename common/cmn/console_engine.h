@@ -393,14 +393,18 @@ namespace cmn {
 
 			//reallocate new grids
 			Glyph* new_glyphs=new Glyph[w*h];
-			for(int i=0; i<w*h; i++) {
-				new_glyphs[i]={' '};
+
+			//copy overlapping
+			for(int i=0; i<w&&i<width; i++) {
+				for(int j=0; j<h&&j<height; j++) {
+					new_glyphs[i+w*j]=glyphs[i+width*j];
+				}
 			}
 
-			//deallocate old
+			//free old
 			delete[] glyphs;
 
-			//assign size & ptrs
+			//transfer over
 			width=w, height=h;
 			glyphs=new_glyphs;
 		}
@@ -1693,18 +1697,21 @@ namespace cmn {
 				case SAPP_EVENTTYPE_KEY_UP:
 					_keys_next[e->key_code]=false;
 					break;
+					_mouse_buttons_next[e->mouse_button]=true;
 				case SAPP_EVENTTYPE_MOUSE_DOWN:
 					_mouse_buttons_next[e->mouse_button]=true;
 					break;
 				case SAPP_EVENTTYPE_MOUSE_UP:
 					_mouse_buttons_next[e->mouse_button]=false;
 					break;
-				case SAPP_EVENTTYPE_MOUSE_MOVE: {
-					float dpi=sapp_dpi_scale();
-					_mouse_x_next=e->mouse_x/dpi;
-					_mouse_y_next=e->mouse_y/dpi;
+				case SAPP_EVENTTYPE_MOUSE_MOVE:
+					_mouse_x_next=e->mouse_x;
+					_mouse_y_next=e->mouse_y;
 					break;
-				}
+				case SAPP_EVENTTYPE_TOUCHES_MOVED:
+					_mouse_x_next=e->touches[0].pos_x;
+					_mouse_y_next=e->touches[0].pos_y;
+					break;
 				default: break;
 			}
 
